@@ -4,7 +4,6 @@ namespace MjLiang\PhpCodingTask\task2;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Stream;
 
 class Controller
 {
@@ -42,6 +41,22 @@ class Controller
     }
 
 
+    //============= request Handlers ==================
+    protected function getHandler(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        if ($this->isJsonRequest($request)) {
+            $response = $this->renderJson($response, json_encode([
+                'message' => 'This is Get Request'
+            ]));
+        } else if ($this->isFormRequest($request)) {
+            $response = $this->renderHtml($response, 'This is Get Request');
+        } else {
+            $response = $response->withStatus('404', 'Other Content Type handlers have not been implemented');
+        }
+
+        return $response;
+    }
+
     protected function postHandler(ServerRequestInterface $request, ResponseInterface $response)
     {
 
@@ -68,23 +83,6 @@ class Controller
                 $response = $response->withStatus('400', 'Bad Request');
             }
 
-        } else {
-            $response = $response->withStatus('404', 'Other Content Type handlers have not been implemented');
-        }
-
-        return $response;
-    }
-
-
-    //============= request Handler ==================
-    protected function getHandler(ServerRequestInterface $request, ResponseInterface $response)
-    {
-        if ($this->isJsonRequest($request)) {
-            $response = $this->renderJson($response, json_encode([
-                'message' => 'This is Get Request'
-            ]));
-        } else if ($this->isFormRequest($request)) {
-            $response = $this->renderHtml($response, 'This is Get Request');
         } else {
             $response = $response->withStatus('404', 'Other Content Type handlers have not been implemented');
         }
