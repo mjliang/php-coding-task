@@ -4,7 +4,12 @@
 namespace MjLiang\PhpCodingTask\orm;
 
 
-
+/**
+ * The validator can validate any property with annotation which defined the type as `int` or `integer`
+ *
+ * Trait NumericValidator
+ * @package MjLiang\PhpCodingTask\orm
+ */
 trait NumericValidator
 {
 

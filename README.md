@@ -21,7 +21,7 @@ The [DownloadLog](src/orm/DownloadLog.php) model represents a log entry denoting
 1. What does the `final` keyword mean the [DownloadLog](src/orm/DownloadLog.php) model? What are the implications in removing the `final` declaration?
 > Answer:
 > 1. The `DownloadLog` class can not be extended.
-> 2. The `DownloadLog` class can be extended by the sub class
+> 2. After removing the `final` keyword, the `DownloadLog` class can be extended by the sub class
 
 
 2. The current of implementation of [DownloadLog](src/orm/DownloadLog.php) contains a fatal error. What is it, and how would it be resolved?
@@ -29,7 +29,7 @@ The [DownloadLog](src/orm/DownloadLog.php) model represents a log entry denoting
 
 > Answer:
 > 1. The `isModified` method in the `ActiveRecordInterface` is not implemented.
-> 2. Implemented in the `ActiveRecord` class.
+> 2. To fix the issue, just need to implement the `isModified` method in the `ActiveRecord` class or in the `DownloadLog` class.
 
 
 ### Coding task 1:
@@ -52,6 +52,12 @@ DownloadLog is modified
 UserId is: 2000
 Destroying DownloadLog
 ```
+
+> Answer:
+> * Clone or download the code to your machine
+> * Make sure you have the latest version of PHP and composer installed on your machine
+> * Run `composer install` on the root directory of the project
+> * Run `php test.php` to see the output
 
 ### Coding task 2:
 
@@ -94,7 +100,7 @@ You do *not* need to create concrete implementations of the `request` and `repon
 
 
 > * My implement of the code is on [Controller](src/task2/Controller.php)
-> * Download the code to your machine
+> * clone or download the code to your machine
 > * Make sure you have the latest version of PHP and composer installed on your machine
 > * Run `composer install` on the root directory of the project
 > * Run `composer test` to do the test
