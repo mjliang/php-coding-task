@@ -10,16 +10,27 @@ Candidates may add code comments or provide any supporting documentation they wi
 
 ### Introduction
 
-This task involves some questions and coding implementations with a mock ActiveRecord-style database ORM. The files for this task are contained are contained with the [orm](orm) directory.
+This task involves some questions and coding implementations with a mock ActiveRecord-style database ORM. The files for this task are contained are contained with the [orm](src/orm) directory.
 
-Assume that the [ActiveRecord](orm/ActiveRecord.php) base class contains a working implementation of the type of features that you would expect of any database ORM.
+Assume that the [ActiveRecord](src/orm/ActiveRecord.php) base class contains a working implementation of the type of features that you would expect of any database ORM.
 
-The [DownloadLog](orm/DownloadLog.php) model represents a log entry denoting a user (identified by a `user_id`) downloading a file (identified by `file_id`).
+The [DownloadLog](src/orm/DownloadLog.php) model represents a log entry denoting a user (identified by a `user_id`) downloading a file (identified by `file_id`).
 
 ### Questions:
 
-1. What does the `final` keyword mean the [DownloadLog](orm/DownloadLog.php) model? What are the implications in removing the `final` declaration?
-2. The current of implementation of [DownloadLog](orm/DownloadLog.php) contains a fatal error. What is it, and how would it be resolved?
+1. What does the `final` keyword mean the [DownloadLog](src/orm/DownloadLog.php) model? What are the implications in removing the `final` declaration?
+> Answer:
+> 1. The `DownloadLog` class can not be extended.
+> 2. The `DownloadLog` class can be extended by the sub class
+
+
+2. The current of implementation of [DownloadLog](src/orm/DownloadLog.php) contains a fatal error. What is it, and how would it be resolved?
+
+
+> Answer:
+> 1. The `isModified` method in the `ActiveRecordInterface` is not implemented.
+> 2. Implemented in the `ActiveRecord` class.
+
 
 ### Coding task 1:
 
@@ -44,7 +55,7 @@ Destroying DownloadLog
 
 ### Coding task 2:
 
-Create a `trait` which validates that a value is numeric. Add this `trait` to [DownloadLog](orm/DownloadLog.php) and use it to validate that `user_id` and `file_id` values are numeric. If they are not, throw an exception.
+Create a `trait` which validates that a value is numeric. Add this `trait` to [DownloadLog](src/orm/DownloadLog.php) and use it to validate that `user_id` and `file_id` values are numeric. If they are not, throw an exception.
 
 ## Task 2: Web application controller implementation
 
@@ -80,3 +91,39 @@ Create one or more base classes that can be integrated into the existing web app
 You need not provide a concrete implementation of the base class(es) but can do so if it helps describes the base implementation.
 
 You do *not* need to create concrete implementations of the `request` and `reponse` objects. Assume that these have been created and conform to the relevant interfaces as mentioned above.
+
+
+> * My implement of the code is on [Controller](src/task2/Controller.php)
+> * Download the code to your machine
+> * Make sure you have the latest version of PHP and composer installed on your machine
+> * Run `composer install` on the root directory of the project
+> * Run `composer test` to do the test
+> * You should see something similar to the following output
+
+```bash
+> ./vendor/bin/phpunit
+PHPUnit 7.5.7 by Sebastian Bergmann and contributors.
+
+
+MjLiang\PhpCodingTask\Tests\orm\DownloadLogTest
+  ✓ cannot assign string to file id [0.005s]
+  ✓ cannot assign string to user id [0.000s]
+  ✓ assign int to user id [0.000s]
+  ✓ assign int to file id [0.000s]
+  ✓ is not modified [0.000s]
+  ✓ is modified [0.000s]
+
+MjLiang\PhpCodingTask\Tests\task2\ControllerTest
+  ✓ json post [0.011s]
+  ✓ form post [0.000s]
+  ✓ get method [0.000s]
+  ✓ delete method [0.000s]
+  ✓ other content type handlers [0.000s]
+  ✓ bad request [0.000s]
+
+
+Time: 51 ms, Memory: 4.00 MB
+
+OK (12 tests, 27 assertions)
+```
+

@@ -1,0 +1,36 @@
+{
+    "name": "mj/php-coding-task",
+    "authors": [
+        {
+            "name": "MJ Liang",
+            "email": "me@mj.kiwi"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7",
+        "sempro/phpunit-pretty-print": "^1.0",
+
+        "symfony/var-dumper": "^4.2",
+        "zendframework/zend-diactoros": "^2.1"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "MjLiang\\PhpCodingTask\\": [
+                "src/"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MjLiang\\PhpCodingTask\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    }
+}

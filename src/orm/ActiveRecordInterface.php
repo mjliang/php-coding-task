@@ -1,6 +1,6 @@
 <?php
 
-namespace Orm;
+namespace MjLiang\PhpCodingTask\orm;
 
 interface ActiveRecordInterface
 {
