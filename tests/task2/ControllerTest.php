@@ -143,9 +143,32 @@ class ControllerTest extends TestCase
 
         $response = $controller->execute($request, new Response());
 
-        $this->assertEquals('404', $response->getStatusCode());
+        $this->assertEquals('200', $response->getStatusCode());
         $this->assertInstanceOf(StreamInterface::class, $response->getBody());
-        $this->assertEquals('Method not Found', $response->getReasonPhrase());
+    }
+
+    public function patchMethod()
+    {
+        $request = new ServerRequest(
+            [],
+            [],
+            'http://example.com',
+            'PATCH',
+            'php://memory',
+            [
+                'Content-Type'  => 'application/json',
+            ],
+            [
+                'cookie1' => 'cookie 1 value'
+            ]
+        );
+
+        $controller = new Controller();
+
+        $response = $controller->execute($request, new Response());
+
+        $this->assertEquals('200', $response->getStatusCode());
+        $this->assertInstanceOf(StreamInterface::class, $response->getBody());
     }
 
     /**
@@ -174,6 +197,33 @@ class ControllerTest extends TestCase
         $this->assertEquals('404', $response->getStatusCode());
         $this->assertInstanceOf(StreamInterface::class, $response->getBody());
         $this->assertEquals('Other Content Type handlers have not been implemented', $response->getReasonPhrase());
+    }
+
+    /**
+     * @test
+     */
+    public function otherMethodRequest()
+    {
+        $request = new ServerRequest(
+            [],
+            [],
+            'http://example.com',
+            'OTHER_METHOD',
+            'php://memory',
+            [
+                'Content-Type'  => 'application/javascript',
+            ],
+            [
+                'cookie1' => 'cookie 1 value'
+            ]
+        );
+
+        $controller = new Controller();
+
+        $response = $controller->execute($request, new Response());
+
+        $this->assertEquals('404', $response->getStatusCode());
+        $this->assertEquals('Method not Found', $response->getReasonPhrase());
     }
 
 
