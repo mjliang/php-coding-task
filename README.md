@@ -112,15 +112,21 @@ PHPUnit 7.5.7 by Sebastian Bergmann and contributors.
 
 
 MjLiang\PhpCodingTask\Tests\orm\DownloadLogTest
-  ✓ cannot assign string to file id [0.005s]
-  ✓ cannot assign string to user id [0.000s]
-  ✓ assign int to user id [0.000s]
-  ✓ assign int to file id [0.000s]
-  ✓ is not modified [0.000s]
-  ✓ is modified [0.000s]
+  ✓Destroying DownloadLog
+ cannot assign string to file id [0.003s]
+  ✓Destroying DownloadLog
+ cannot assign string to user id [0.000s]
+  ✓Destroying DownloadLog
+ assign int to user id [0.000s]
+  ✓Destroying DownloadLog
+ assign int to file id [0.000s]
+  ✓Destroying DownloadLog
+ is not modified [0.000s]
+  ✓Destroying DownloadLog
+ is modified [0.000s]
 
 MjLiang\PhpCodingTask\Tests\task2\ControllerTest
-  ✓ json post [0.011s]
+  ✓ json post [0.016s]
   ✓ form post [0.000s]
   ✓ get method [0.000s]
   ✓ delete method [0.000s]
@@ -128,8 +134,7 @@ MjLiang\PhpCodingTask\Tests\task2\ControllerTest
   ✓ bad request [0.000s]
 
 
-Time: 51 ms, Memory: 4.00 MB
+Time: 59 ms, Memory: 4.00 MB
 
-OK (12 tests, 27 assertions)
 ```
 
