@@ -8,7 +8,6 @@
 
 namespace MjLiang\PhpCodingTask\Tests\task2;
 
-
 use MjLiang\PhpCodingTask\task2\Controller;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -17,7 +16,6 @@ use Psr\Http\Message\StreamInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\StreamFactory;
-
 
 class ControllerTest extends TestCase
 {

@@ -2,7 +2,6 @@
 
 namespace MjLiang\PhpCodingTask\orm;
 
-
 /**
  * ActiveRecord
  *
@@ -37,7 +36,8 @@ abstract class ActiveRecord implements ActiveRecordInterface
     /**
      * @return bool
      */
-    public function isModified() : bool {
+    public function isModified() : bool
+    {
         return (bool) $this->isModified;
     }
 
@@ -47,7 +47,8 @@ abstract class ActiveRecord implements ActiveRecordInterface
      * @return $this|bool|mixed
      * @throws \ReflectionException
      */
-    public function __call($name, $arguments) {
+    public function __call($name, $arguments)
+    {
 
         $action = substr($name, 0, 3);
 
@@ -55,18 +56,17 @@ abstract class ActiveRecord implements ActiveRecordInterface
             case 'get':
             case 'set':
                 $property = lcfirst(substr($name, 3));
-                if(property_exists($this,$property)) {
-
+                if (property_exists($this, $property)) {
                     $reflector = new \ReflectionObject($this);
                     $reflectionProperty = $reflector->getProperty($property);
                     $reflectionProperty->setAccessible(true);
 
                     $value = $reflectionProperty->getValue($this);
 
-                    if($action == 'set') {
+                    if ($action == 'set') {
                         $reflectionProperty->setValue($this, $arguments[0]);
 
-                        if($arguments[0] == $value) {
+                        if ($arguments[0] == $value) {
                             $this->isModified = false;
                         } else {
                             $this->isModified = true;
@@ -78,8 +78,8 @@ abstract class ActiveRecord implements ActiveRecordInterface
                 }
 
                 break;
-            default :
-                return FALSE;
+            default:
+                return false;
         }
     }
 

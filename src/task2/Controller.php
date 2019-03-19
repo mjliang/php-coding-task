@@ -61,28 +61,21 @@ class Controller
     {
 
         if ($this->isJsonRequest($request)) {
-
             if ($this->isValidJsonRequest($request)) {
-
                 $response = $this->renderJson($response, json_encode([
                     'status' => 'success'
                 ]));
-
             } else {
                 $response = $response->withStatus('400', 'Bad Request');
             }
-
         } else if ($this->isFormRequest($request)) {
-
             if ($this->isValidFormRequest($request)) {
-
                 $responseBody = '<h1>success</h1>';
 
                 $response = $this->renderHtml($response, $responseBody);
             } else {
                 $response = $response->withStatus('400', 'Bad Request');
             }
-
         } else {
             $response = $response->withStatus('404', 'Other Content Type handlers have not been implemented');
         }
@@ -117,21 +110,7 @@ class Controller
     }
 
 
-    protected function isJsonRequest(ServerRequestInterface $request): bool
-    {
-        return (@$request->getHeader('Content-Type')[0] == 'application/json') ? true : false;
-    }
 
-
-    protected function isFormRequest(ServerRequestInterface $request): bool
-    {
-        if (@$request->getHeader('Content-Type')[0] == 'application/x-www-form-urlencoded'
-            or @$request->getHeader('Content-Type')[0] == 'multipart/form-data') {
-            return true;
-        }
-
-        return false;
-    }
 
     //============= Validators ==================
     protected function isValidJsonRequest(ServerRequestInterface $request): bool
@@ -176,5 +155,19 @@ class Controller
         return $response;
     }
 
+    protected function isJsonRequest(ServerRequestInterface $request): bool
+    {
+        return (@$request->getHeader('Content-Type')[0] == 'application/json') ? true : false;
+    }
 
+
+    protected function isFormRequest(ServerRequestInterface $request): bool
+    {
+        if (@$request->getHeader('Content-Type')[0] == 'application/x-www-form-urlencoded'
+            or @$request->getHeader('Content-Type')[0] == 'multipart/form-data') {
+            return true;
+        }
+
+        return false;
+    }
 }

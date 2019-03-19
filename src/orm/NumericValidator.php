@@ -3,7 +3,6 @@
 
 namespace MjLiang\PhpCodingTask\orm;
 
-
 /**
  * The validator can validate any property with annotation which defined the type as `int` or `integer`
  *
@@ -20,21 +19,20 @@ trait NumericValidator
         switch ($action) {
             case 'set':
                 $property = lcfirst(substr($name, 3));
-                if(property_exists($this,$property)) {
-
+                if (property_exists($this, $property)) {
                     $value = $arguments[0];
 
                     $reflector = new \ReflectionObject($this);
                     $reflectionProperty = $reflector->getProperty($property);
 
                     $comment = $reflectionProperty->getDocComment();
-                    if($comment) {
+                    if ($comment) {
                         if (preg_match('/@var\s+([^\s]+)/', $comment, $matches)) {
                             list(, $type) = $matches;
                             switch ($type) {
                                 case 'int':
                                 case 'integer':
-                                    if(!is_numeric($value)) {
+                                    if (!is_numeric($value)) {
                                         throw new \Exception('Not a number!');
                                     }
                             }
@@ -43,7 +41,7 @@ trait NumericValidator
                 }
 
                 break;
-            default :
+            default:
                 break;
         }
 
