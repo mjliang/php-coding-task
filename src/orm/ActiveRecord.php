@@ -83,4 +83,8 @@ abstract class ActiveRecord implements ActiveRecordInterface
         }
     }
 
+    public function __destruct()
+    {
+        echo "Destroying " . (new \ReflectionObject($this))->getShortName() . PHP_EOL;
+    }
 }

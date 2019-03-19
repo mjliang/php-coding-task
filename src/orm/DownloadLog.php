@@ -27,8 +27,5 @@ final class DownloadLog extends ActiveRecord
      */
     private $userId;
 
-    public function __destruct()
-    {
-        echo "Destroying DownloadLog" . PHP_EOL;
-    }
+
 }
